@@ -21,7 +21,7 @@
   --danger: #ef4444;
   --warning: #f59e0b;
 }
-* { margin:0; padding:0; box-sizing:border-box; }
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
 html { scroll-behavior: smooth; }
 
 body {
@@ -557,7 +557,9 @@ h1.main-title {
 .modal-btn.danger { background:var(--danger); color:#fff; box-shadow:0 4px 16px rgba(239,68,68,0.3); }
 .modal-btn.danger:hover { transform:translateY(-1px); box-shadow:0 8px 24px rgba(239,68,68,0.4); }
 
-/* Responsive */
+/* ===== RESPONSIVE ===== */
+
+/* Tablet */
 @media (max-width: 1024px) {
   #topic-select,
   #results {
@@ -573,18 +575,23 @@ h1.main-title {
   }
 }
 
+/* Small tablet / large phone */
 @media (max-width: 768px) {
+  /* reduce decorative orbs for performance */
+  .orb { opacity: 0.5; }
+
   #home {
     padding: 34px 16px;
   }
 
   .stats-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 12px;
     margin-bottom: 36px;
   }
 
   .stat-pill {
-    flex: 1 1 140px;
     padding: 14px 16px;
   }
 
@@ -594,22 +601,44 @@ h1.main-title {
     grid-template-columns: 1fr;
   }
 
+  /* Exam topbar: reorganize into rows */
   .exam-topbar {
     padding: 12px 14px;
-    gap: 10px;
+    gap: 8px;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    grid-template-rows: auto auto;
   }
 
-  .exam-course-tag,
-  .score-display,
-  .timer-wrap,
+  .exam-course-tag {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+  }
+
+  .timer-wrap {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
   .quit-btn {
-    flex: 1 1 auto;
+    grid-column: 3;
+    grid-row: 1;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
     justify-content: center;
   }
 
+  .score-display {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: start;
+  }
+
   .exam-progress-wrap {
-    flex: 1 1 100%;
-    order: 10;
+    grid-column: 2 / -1;
+    grid-row: 2;
   }
 
   .question-area {
@@ -633,6 +662,7 @@ h1.main-title {
     padding: 14px 14px;
     gap: 10px;
     font-size: 0.95rem;
+    min-height: 48px;
   }
 
   .q-nav {
@@ -643,10 +673,30 @@ h1.main-title {
   .q-nav .nav-btn {
     width: 100%;
     justify-content: center;
+    min-height: 48px;
   }
 
   .q-palette-wrap {
     padding: 12px 14px;
+    position: relative;
+  }
+
+  /* Add scroll fade indicators on palette */
+  .q-palette-wrap::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    background: linear-gradient(90deg, transparent, rgba(8,11,18,0.95));
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .palette-dot {
+    min-width: 32px;
+    min-height: 32px;
   }
 
   .review-item {
@@ -661,14 +711,51 @@ h1.main-title {
   .result-actions .action-btn {
     width: 100%;
     justify-content: center;
+    min-height: 48px;
   }
 
   .flashcard {
-    height: 360px;
+    height: 340px;
   }
 
   .card-face {
     padding: 26px 20px;
+    overflow-y: auto;
+  }
+
+  .flashcard-nav {
+    gap: 12px;
+  }
+
+  .flashcard-nav .nav-btn {
+    min-height: 44px;
+  }
+
+  .history-item {
+    padding: 14px 16px;
+    gap: 12px;
+  }
+
+  .select-all-row {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .select-all-btn {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  .topic-filter {
+    gap: 6px;
+    padding-bottom: 4px;
+  }
+
+  .tf-btn {
+    min-height: 40px;
+    display: flex;
+    align-items: center;
   }
 
   .modal-actions {
@@ -677,55 +764,184 @@ h1.main-title {
 
   .modal-actions .modal-btn {
     width: 100%;
+    min-height: 48px;
+  }
+
+  #topic-select,
+  #results {
+    padding: 40px 16px;
+  }
+
+  #study {
+    padding: 30px 16px;
   }
 }
 
+/* Phone */
 @media (max-width: 480px) {
+  /* hide orbs on small phones for perf */
+  .orb { display: none; }
+
+  body::before {
+    background-size: 30px 30px;
+    animation: none;
+  }
+
   .logo-badge {
     letter-spacing: 2px;
     padding: 8px 14px;
+    font-size: 10px;
+  }
+
+  h1.main-title {
+    font-size: clamp(2rem, 10vw, 3rem);
   }
 
   .title-sub,
   .screen-subtitle {
     letter-spacing: 1.2px;
+    font-size: 11px;
+  }
+
+  .title-desc {
+    font-size: 0.9rem;
+    margin-bottom: 28px;
+  }
+
+  .stats-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .stat-num {
+    font-size: 1.4rem;
+  }
+
+  .mode-card {
+    padding: 24px 20px;
+  }
+
+  .mode-icon {
+    font-size: 2rem;
+    margin-bottom: 12px;
   }
 
   #topic-select,
   #results,
   #study {
-    padding: 36px 14px;
+    padding: 28px 12px;
   }
 
   .back-btn {
-    margin-bottom: 28px;
+    margin-bottom: 24px;
+    min-height: 44px;
   }
 
   .screen-title {
-    font-size: 1.55rem;
+    font-size: 1.45rem;
   }
 
   .topic-card {
-    padding: 16px;
+    padding: 14px;
+    gap: 10px;
+  }
+
+  .topic-cb {
+    width: 22px;
+    height: 22px;
   }
 
   .start-exam-btn {
     max-width: none;
     width: 100%;
+    padding: 16px 24px;
+    font-size: 0.9rem;
   }
 
-  .exam-course-tag,
-  .score-display,
-  .timer-wrap,
+  /* Exam topbar: simplified stacked layout */
+  .exam-topbar {
+    grid-template-columns: 1fr auto auto;
+    padding: 10px 12px;
+    gap: 6px;
+  }
+
+  .exam-course-tag {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+
+  .timer-wrap {
+    padding: 6px 10px;
+  }
+
+  .timer-val {
+    font-size: 0.85rem;
+    min-width: 42px;
+  }
+
   .quit-btn {
-    flex: 1 1 100%;
+    padding: 6px 10px;
+    font-size: 9px;
+  }
+
+  .score-badge {
+    font-size: 10px;
+    padding: 3px 8px;
+  }
+
+  .question-area {
+    padding: 20px 12px;
+  }
+
+  .q-num {
+    font-size: 1.6rem;
   }
 
   .q-topic-tag {
-    max-width: 100%;
+    max-width: 180px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: 9px;
+  }
+
+  .question-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .option-item {
+    padding: 12px;
+    gap: 10px;
+    font-size: 0.9rem;
+    border-radius: 12px;
+  }
+
+  .option-letter {
+    width: 26px;
+    height: 26px;
+    font-size: 11px;
+    border-radius: 7px;
+  }
+
+  .explanation-box {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .exp-text {
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+
+  .nav-btn {
+    padding: 12px 16px;
+    font-size: 10px;
+  }
+
+  .q-palette-wrap {
+    padding: 10px 12px;
   }
 
   .palette-dot {
@@ -736,33 +952,214 @@ h1.main-title {
   }
 
   .score-ring {
-    width: 150px;
-    height: 150px;
+    width: 140px;
+    height: 140px;
   }
 
   .score-pct {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 
   .result-grade {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+  }
+
+  .result-message {
+    font-size: 0.9rem;
+  }
+
+  .result-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .result-stat {
+    padding: 16px 12px;
+    border-radius: 12px;
+  }
+
+  .result-stat .val {
+    font-size: 1.4rem;
+  }
+
+  .review-item {
+    padding: 14px 16px;
+    border-radius: 10px;
+  }
+
+  .review-item .r-q {
+    font-size: 0.85rem;
+  }
+
+  .action-btn {
+    padding: 14px 20px;
+    font-size: 0.85rem;
   }
 
   .flashcard {
-    height: 320px;
+    height: 300px;
+  }
+
+  .card-face {
+    padding: 22px 16px;
+    border-radius: 18px;
+  }
+
+  .card-face .card-hint {
+    font-size: 9px;
   }
 
   .card-face .card-q {
-    font-size: 1.06rem;
+    font-size: 1rem;
   }
 
   .card-face .card-a {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
   }
 
   .modal-box {
     padding: 28px 18px;
+    border-radius: 16px;
   }
+
+  .modal-title {
+    font-size: 1.15rem;
+  }
+
+  .modal-msg {
+    font-size: 0.85rem;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 360px) {
+  h1.main-title {
+    font-size: 1.8rem;
+  }
+
+  .stats-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+
+  .stat-num {
+    font-size: 1.2rem;
+  }
+
+  .stat-label {
+    font-size: 9px;
+  }
+
+  .mode-card {
+    padding: 20px 16px;
+  }
+
+  .mode-title {
+    font-size: 1.05rem;
+  }
+
+  .mode-desc {
+    font-size: 0.8rem;
+  }
+
+  .question-area {
+    padding: 16px 10px;
+  }
+
+  .option-item {
+    padding: 10px;
+    font-size: 0.85rem;
+  }
+
+  .flashcard {
+    height: 270px;
+  }
+
+  .result-stat .val {
+    font-size: 1.2rem;
+  }
+
+  .palette-dot {
+    width: 26px;
+    height: 26px;
+    font-size: 8px;
+  }
+}
+
+/* Safe area insets for notched phones */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .exam-topbar {
+    padding-top: max(12px, env(safe-area-inset-top));
+    padding-left: max(14px, env(safe-area-inset-left));
+    padding-right: max(14px, env(safe-area-inset-right));
+  }
+
+  .q-palette-wrap {
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
+    padding-left: max(14px, env(safe-area-inset-left));
+    padding-right: max(14px, env(safe-area-inset-right));
+  }
+
+  #home,
+  #topic-select,
+  #results,
+  #study {
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+    padding-bottom: max(20px, env(safe-area-inset-bottom));
+  }
+}
+
+/* Landscape phone */
+@media (max-height: 500px) and (orientation: landscape) {
+  #home {
+    padding: 20px 24px;
+  }
+
+  h1.main-title {
+    font-size: 2rem;
+  }
+
+  .stats-row {
+    margin-bottom: 24px;
+  }
+
+  .flashcard {
+    height: 220px;
+  }
+
+  .card-face {
+    padding: 16px;
+  }
+
+  .score-ring {
+    width: 120px;
+    height: 120px;
+  }
+
+  .score-pct {
+    font-size: 1.5rem;
+  }
+
+  .result-hero {
+    margin-bottom: 24px;
+  }
+}
+
+/* Touch hover fix — prevent sticky hover on touch devices */
+@media (hover: none) {
+  .mode-card:hover { transform: none; box-shadow: none; }
+  .mode-card:active { transform: scale(0.98); }
+
+  .topic-card:hover { transform: none; background: var(--surface); }
+  .topic-card:active { background: var(--surface2); }
+  .topic-card.selected:hover { background: rgba(0,229,160,0.06); }
+
+  .option-item:hover:not(.locked) { border-color: var(--border); background: var(--surface); }
+  .option-item:hover:not(.locked)::before { background: transparent; }
+  .option-item:active:not(.locked) { background: rgba(0,229,160,0.04); }
+
+  .stat-pill:hover { transform: none; }
 }
 </style>
 </head>
