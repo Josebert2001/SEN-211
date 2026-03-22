@@ -1146,6 +1146,33 @@ h1.main-title {
   }
 }
 
+/* Read-aloud button */
+.read-aloud-btn {
+  display:inline-flex; align-items:center; gap:6px;
+  background:var(--surface); border:1px solid var(--border);
+  color:var(--muted); font-family:'DM Mono',monospace; font-size:11px;
+  letter-spacing:1.5px; padding:10px 16px; border-radius:10px;
+  cursor:pointer; transition:all 0.25s; user-select:none;
+}
+.read-aloud-btn:hover { border-color:var(--accent); color:var(--accent); }
+.read-aloud-btn.speaking {
+  border-color:var(--accent); color:var(--accent);
+  background:rgba(0,229,160,0.08);
+  animation:pulse-glow 1.5s ease-in-out infinite;
+}
+@keyframes pulse-glow {
+  0%,100% { box-shadow:0 0 0 0 rgba(0,229,160,0.2); }
+  50% { box-shadow:0 0 12px 2px rgba(0,229,160,0.15); }
+}
+.read-aloud-btn .speak-icon { font-size:16px; line-height:1; }
+
+@media (max-width: 480px) {
+  .read-aloud-btn {
+    padding: 8px 12px;
+    font-size: 10px;
+  }
+}
+
 /* Touch hover fix — prevent sticky hover on touch devices */
 @media (hover: none) {
   .mode-card:hover { transform: none; box-shadow: none; }
@@ -1248,7 +1275,13 @@ h1.main-title {
       <div class="q-num" id="q-num-big">01</div>
       <span class="q-topic-tag" id="q-topic-tag">TOPIC</span>
     </div>
-    <div class="question-text" id="question-text">Loading...</div>
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
+      <div class="question-text" id="question-text" style="flex:1;">Loading...</div>
+      <button class="read-aloud-btn" id="exam-read-btn" onclick="toggleReadAloud('exam')" title="Read aloud">
+        <span class="speak-icon" id="exam-speak-icon">🔊</span>
+        <span id="exam-speak-label">READ</span>
+      </button>
+    </div>
     <ul class="options-list" id="options-list"></ul>
     <div class="explanation-box" id="explanation-box">
       <div class="exp-header" id="exp-header"></div>
@@ -1330,6 +1363,10 @@ h1.main-title {
 
     <div class="flashcard-nav">
       <button class="nav-btn" onclick="prevCard()">← PREV</button>
+      <button class="read-aloud-btn" id="fc-read-btn" onclick="toggleReadAloud('flashcard')" title="Read aloud">
+        <span class="speak-icon" id="fc-speak-icon">🔊</span>
+        <span id="fc-speak-label">READ</span>
+      </button>
       <span class="fc-counter" id="fc-counter">1 / 1</span>
       <button class="nav-btn" onclick="nextCard()">NEXT →</button>
     </div>
@@ -2340,6 +2377,100 @@ function goHome() {
   showScreen('home');
   updateHomeHighScore();
 }
+
+// ============================================================
+// READ ALOUD (Web Speech API)
+// ============================================================
+let currentUtterance = null;
+let isSpeaking = false;
+
+function stopSpeech() {
+  if (speechSynthesis.speaking || speechSynthesis.pending) {
+    speechSynthesis.cancel();
+  }
+  isSpeaking = false;
+  document.querySelectorAll('.read-aloud-btn').forEach(btn => btn.classList.remove('speaking'));
+  const examLabel = document.getElementById('exam-speak-label');
+  const fcLabel = document.getElementById('fc-speak-label');
+  const examIcon = document.getElementById('exam-speak-icon');
+  const fcIcon = document.getElementById('fc-speak-icon');
+  if (examLabel) { examLabel.textContent = 'READ'; examIcon.textContent = '🔊'; }
+  if (fcLabel) { fcLabel.textContent = 'READ'; fcIcon.textContent = '🔊'; }
+}
+
+function toggleReadAloud(context) {
+  if (!('speechSynthesis' in window)) {
+    alert('Sorry, your browser does not support text-to-speech.');
+    return;
+  }
+
+  if (isSpeaking) {
+    stopSpeech();
+    return;
+  }
+
+  let text = '';
+  let btn, label, icon;
+
+  if (context === 'exam') {
+    const q = examQuestions[currentQ];
+    const letters = ['A', 'B', 'C', 'D'];
+    text = q.q + '. ';
+    text += q.opts.map((opt, i) => letters[i] + ': ' + opt).join('. ') + '.';
+    if (answers[currentQ] !== undefined) {
+      text += ' The correct answer is ' + letters[q.ans] + ': ' + q.opts[q.ans] + '. ' + q.exp;
+    }
+    btn = document.getElementById('exam-read-btn');
+    label = document.getElementById('exam-speak-label');
+    icon = document.getElementById('exam-speak-icon');
+  } else {
+    const card = fcFiltered[fcIndex];
+    text = card.q;
+    if (fcFlipped) {
+      // Strip HTML tags from answer for speech
+      const tmp = document.createElement('div');
+      tmp.innerHTML = card.a;
+      text += '. Answer: ' + tmp.textContent;
+    }
+    btn = document.getElementById('fc-read-btn');
+    label = document.getElementById('fc-speak-label');
+    icon = document.getElementById('fc-speak-icon');
+  }
+
+  currentUtterance = new SpeechSynthesisUtterance(text);
+  currentUtterance.rate = 0.95;
+  currentUtterance.pitch = 1;
+  currentUtterance.lang = 'en-US';
+
+  isSpeaking = true;
+  btn.classList.add('speaking');
+  label.textContent = 'STOP';
+  icon.textContent = '⏹';
+
+  currentUtterance.onend = () => stopSpeech();
+  currentUtterance.onerror = () => stopSpeech();
+
+  speechSynthesis.speak(currentUtterance);
+}
+
+// Stop speech when navigating away from questions
+const origRenderQuestion = renderQuestion;
+renderQuestion = function() {
+  stopSpeech();
+  origRenderQuestion();
+};
+
+const origRenderFlashcard = renderFlashcard;
+renderFlashcard = function() {
+  stopSpeech();
+  origRenderFlashcard();
+};
+
+const origShowScreen = showScreen;
+showScreen = function(id) {
+  stopSpeech();
+  origShowScreen(id);
+};
 
 // Init
 updateHomeHighScore();
