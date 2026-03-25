@@ -1,0 +1,64 @@
+// SHUFFLED QUESTIONS Q69-Q131
+// Answer positions have been randomized and redistributed
+// Replace the original Q69-Q131 in your QUESTIONS array with these
+
+  { id:69, opts:["A deployment script","A line of code in the system","A conditional capability needed by a user to solve a problem or achieve an objective","A test case for the system"], ans:2 }
+  { id:73, opts:["Feasibility, elicitation, specification, and validation","Planning, design, coding, and testing","Coding, testing, deployment, and maintenance","Interviews, scenarios, use cases, and prototypes"], ans:0 }
+  { id:74, opts:["Release the system to production environment","Assess if needs can be satisfied cost-effectively","Document and write the SRS paper","Execute test cases on the software"], ans:1 }
+  { id:75, opts:["Deriving requirements through observation and discussion","Deploying and releasing the software","Executing unit tests on source code","Writing code based on developer guesses"], ans:0 }
+  { id:76, opts:["Structured","Concise","Black-box view","Verifiable"], ans:2 }
+  { id:77, opts:["Structured","Verifiable","Conceptual Integrity","Concise"], ans:1 }
+  { id:78, opts:["Complete and Consistent (no contradictions)","Only about performance","Vague and flexible","Only about security"], ans:0 }
+  { id:79, opts:["Specific system features like login modules","Only user interface presentation aspects","Quality attributes affecting the entire system","Only database schema and storage"], ans:2 }
+  { id:80, opts:["System readiness for deployment phase","Source code quality and structure standards","Meeting system performance benchmarks","Validity, consistency, completeness, realism"], ans:3 }
+  { id:81, opts:["Prototyping","Reviews","Test-case generation","Automated consistency analysis"], ans:0 }
+  { id:82, opts:["Conducting structured interview sessions","Observing and analyzing how people actually work","Making prototypes of the proposed system","Writing formal use case documents"], ans:1 }
+  { id:83, opts:["A database table record","A pre-written test case","A person or system using the system being built","Only the system administrator"], ans:2 }
+  { id:84, opts:["Ideal flow when everything succeeds","What happens if the system crashes","Alternative paths when errors occur","Performance measurements under system load"], ans:0 }
+  { id:85, opts:["Requirement specification and documentation","Requirement classification and organization","Requirements prioritization and negotiation","Requirements discovery and gathering"], ans:2 }
+  { id:86, opts:["Writing and coding the source code","Transforming requirements into suitable form","Deploying software to production environment","Testing software thoroughly before release"], ans:1 }
+  { id:87, opts:["Systems that control embedded devices","Applications accessed via the internet","Applications running on a local computer","Systems processing data in batches"], ans:2 }
+  { id:88, opts:["Software for entertainment purposes","Software systems controlling hardware devices","Systems that process data in batches","Applications accessed on the web"], ans:1 }
+  { id:89, opts:["Database design and schema creation","Architectural design of the system","Component design and implementation","Interface design and specification"], ans:1 }
+  { id:90, opts:["Automated test cases for validation","A fully deployed application system","Compiled source code and executables","Design document describing system architecture"], ans:3 }
+  { id:91, opts:["Specifying interfaces between system components","Writing the user interface code only","Creating database tables and schemas","Writing automated test cases and scripts"], ans:0 }
+  { id:92, opts:["Writing SQL queries for data access","Testing database server performance loads","Deploying database to production servers","Designing data structures and database schema"], ans:3 }
+  { id:93, opts:["A specialized testing framework only","A platform for deploying software","A database management system only","Environment coordinating tools for development"], ans:3 }
+  { id:94, opts:["Eclipse, Visual Studio, or NetBeans","Google Chrome web browser application","Microsoft Word document processor","Adobe Photoshop image editing software"], ans:0 }
+  { id:95, opts:["Coding and Software Engineering concepts","Computer Analysis and System Evaluation","Computer Aided Software Engineering","Complete Application Software Environment"], ans:2 }
+  { id:96, opts:["Physical desks or tables for developers","Integrated tools supporting development stages","Specialized testing tools only","Only software design and modeling tools"], ans:1 }
+  { id:97, opts:["Workbench includes no tools by default","The workbench is free and has no cost","Only for open-source software projects","Users can integrate their own custom tools"], ans:3 }
+  { id:98, opts:["Tool that analyzes code at runtime","Static analysis and checking tool","Language compiler that creates object code","Combines object files into executable"], ans:2 }
+  { id:99, opts:["Is the software deployed correctly?","Have we built it right per specifications?","Does the product meet user expectations?","Have we built the right product?"], ans:1 }
+  { id:100, opts:["Does the product meet system specifications?","Have we built the RIGHT product needed?","Have we built it right per specifications?","Does the code follow structure conventions?"], ans:1 }
+  { id:101, opts:["Any variance from attributes causing dissatisfaction","A timeout or network connection problem","A violation of coding style conventions","A feature requested but not implemented"], ans:0 }
+  { id:102, opts:["A temporary network connection timeout","A requirement missing from documentation","A condition causing system failure to perform","A user bug report or complaint"], ans:2 }
+  { id:103, opts:["A fault or bug in the source code","An error in the design documentation","A missing or absent test case","System inability to perform per specification"], ans:3 }
+  { id:104, opts:["Testing security and penetration vulnerabilities","Testing with expected normal usage scenarios","Testing performance under heavy system load","Testing focused on finding and exposing defects"], ans:1 }
+  { id:105, opts:["Testing using typical expected user patterns","Performance load testing of the system","User acceptance testing of normal scenarios","Testing with deliberately obscure cases"], ans:3 }
+  { id:106, opts:["Validating the entire system end-to-end","Testing individual module functionality","Testing module integration and interfaces","User acceptance and satisfaction testing"], ans:2 }
+  { id:107, opts:["Unit testing","Beta testing always","Regression testing","Alpha testing — for custom systems developed for a single client"], ans:3 }
+  { id:108, opts:["Database schema or structure is updated","A completely new project is initiated","Changes are made to check for side effects","Source code is first being written"], ans:2 }
+  { id:109, opts:["Create user and system documentation","Prove the software has no possible defects","Expose defects before production use","Teach end users how to use the system"], ans:2 }
+  { id:110, opts:["Mobile applications running on devices","Older systems using outdated technology","New systems built with latest technology","Systems exclusively used by government"], ans:1 }
+  { id:111, opts:["The application data storage","Support software and utilities","System hardware and infrastructure","Cloud API endpoints and services"], ans:3 }
+  { id:112, opts:["Developers enjoy rewriting code from scratch","Software systems never require any changes","Business changes generate new requirements","Deployment always requires evolution"], ans:2 }
+  { id:113, opts:["Improving system performance metrics","Adding new features to the system","Fixing bugs, vulnerabilities, and errors","Adapting to new operating systems"], ans:2 }
+  { id:114, opts:["Adapting software to new platforms or OS","Testing software system components","Fixing and repairing bugs","Introducing and adding new features"], ans:0 }
+  { id:115, opts:["It develops entirely new functionality","It requires rewriting all the code","Reduces risk and cost compared to replacement","Complete reengineering is always faster"], ans:2 }
+  { id:116, opts:["Translating code between programming languages","Refactoring program code structure","Analyzing code to document organization","Converting legacy database structures"], ans:2 }
+  { id:117, opts:["Converting code to a newer language","Improving the overall program structure","Cleaning and organizing database files","Analyzing and documenting code"], ans:0 }
+  { id:118, opts:["Because software testing is simple","Because software is intangible and unique","Because there are too many developers","Because software development is inexpensive"], ans:1 }
+  { id:119, opts:["User and customer satisfaction factors","The overall business market conditions","The project schedule or resources","Only the software code quality"], ans:2 }
+  { id:120, opts:["The organization's financial situation","The software quality or performance","Individual team member morale","Only the overall project timeline"], ans:1 }
+  { id:121, opts:["Only the system code quality","Individual developer work performance","The organization developing the software","Only the project timeline and schedule"], ans:2 }
+  { id:122, opts:["Plan, Design, Code, Test","Identify, Analyze, Plan, Monitor","Deploy, Monitor, Fix, Document","Budget, Schedule, Staff, Implementation"], ans:1 }
+  { id:123, opts:["Preventing or eliminating all risks","Finding and identifying new risks only","Checking if risk probability or effects change","Writing down the risk management plan"], ans:2 }
+  { id:124, opts:["Status reporting and documentation","Human resources and team management","Risk identification and monitoring","Proposal writing to win contracts"], ans:3 }
+  { id:125, opts:["Hiring more developers for the team","Purchasing new hardware equipment","Quality control and quality assurance","Writing as much code as possible"], ans:2 }
+  { id:126, opts:["Portability across platforms","System reliability and uptime","Usability and ease of interface","Correctness of implementation"], ans:3 }
+  { id:127, opts:["How fast the software performance is","How easily the system can be deployed","How simple the user interface is","The effort to find and fix a fault"], ans:3 }
+  { id:128, opts:["The software is developed open source","The software works without internet","The effort to transfer software to other platforms","The software size is small"], ans:2 }
+  { id:129, opts:["The software deployment procedures","Quality controls and activities to verify quality","The project budget and timeline","Only the coding and style standards"], ans:1 }
+  { id:130, opts:["The project timeline and schedule","A measurable attribute norm for compliance","The organizational team structure","Rules prescribing how to do something"], ans:1 }
+  { id:131, opts:["The effort to work with other software","How easy the system is to use","How fast the system performance is","How secure the software system is"], ans:0 }
